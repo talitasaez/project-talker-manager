@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs').promises;
 // 
-const talkerPath = '.src/talker.json';
+const talkerPath = 'src/talker.json';
 
 const app = express();
 app.use(express.json());

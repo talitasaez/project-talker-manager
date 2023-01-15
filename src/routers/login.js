@@ -1,8 +1,8 @@
 const express = require('express');
 
-const token = require('../middlewares/token');
-const validarEmail = require('../middlewares/validarEmailLogin');
-const validarSenha = require('../middlewares/validarSenhaLogin');
+const token = require('../middlewares/login/token');
+const validarEmail = require('../middlewares/login/validarEmailLogin');
+const validarSenha = require('../middlewares/login/validarSenhaLogin');
 
 const loginRouter = express.Router();
 

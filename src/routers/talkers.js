@@ -61,8 +61,9 @@ autorizarTalkers,
 validarNameTalker,
 validarAgeTalker,
 validarTalk,
-validarWatchedAtTalker,
 validarRateTalker,
+validarWatchedAtTalker,
+
 async (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;

@@ -24,7 +24,6 @@ talkerRouter.get('/talker/search', validarTokenTalker, async (req, res) => {
   const searchTerm = req.query.q;
   const allTalker = await getAllTalker();
   if (!searchTerm) return res.status(200).json(allTalker);
-  
   const hasTalker = allTalker.filter((e) => e.name.includes(searchTerm));
   if (!hasTalker) return res.status(200).json([]);
   return res.status(200).json(hasTalker);

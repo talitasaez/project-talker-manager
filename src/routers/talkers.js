@@ -80,4 +80,12 @@ async (req, res) => {
   return res.status(200).json(putTalker);
 });
   
+talkerRouter.delete('/talker/:id', validarTokenTalker, async (req, res) => {
+const { id } = req.params;
+const allTalker = await getAllTalker();
+const talkerId = allTalker.find((e) => e.id !== id);
+await writeTalker(talkerId);
+return res.status(204).end();
+});
+ 
   module.exports = talkerRouter;

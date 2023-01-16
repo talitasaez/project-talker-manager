@@ -1,6 +1,6 @@
-const autorizarTalker = (req, res, next) => {
+const validarTokenTalker = (req, res, next) => {
     const { authorization } = req.headers;
-    if (!authorization || authorization === '') {
+    if (!authorization) {
       return res.status(401).json({ message: 'Token não encontrado' });
     }
     if (authorization.length !== 16) {
@@ -8,4 +8,4 @@ const autorizarTalker = (req, res, next) => {
     }
     next();
 };
-module.exports = autorizarTalker;
+module.exports = validarTokenTalker;

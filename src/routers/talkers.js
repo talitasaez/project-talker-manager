@@ -2,12 +2,18 @@ const express = require('express');
 
 const { getAllTalker } = require('../fsUtils');
 
-// const { writeTalker } = require('../fsUtils');
+const { writeTalker } = require('../fsUtils');
+
+const autorizarTalkers = require('../middlewares/talker/authorization.talker');
+// const validarTokenTalker = require('../middlewares/talker/validarTokenTalker');
+const validarNameTalker = require('../middlewares/talker/validarNameTalker');
+const validarAgeTalker = require('../middlewares/talker/validarAgeTalker');
+const validarWatchedAtTalker = require('../middlewares/talker/validarWatchedAtTalker');
+const validarRateTalker = require('../middlewares/talker/validarRateTalker');
+const validarTalk = require('../middlewares/talker/validarTalk');
 
 const talkerRouter = express.Router();
-
 talkerRouter.get('/talker', async (req, res) => {
-    console.log(req);
     const talker = await getAllTalker();
     res.status(200).json(talker);
     if (talker === null) return [];
@@ -23,18 +29,17 @@ talkerRouter.get('/talker', async (req, res) => {
     return res.status(200).json(talkerId);
 });
 
-// talkerRouter.post('/talker', async (req, res) => {
-// const { name, age, talk: { watchedAt, rate } } = req.body;
-// const talkers = await getAllTalker();
-// const post = {
-//   id: talkers.length + 1,
-//     name,
-//     age,
-//     talk: {
-//       watchedAt,
-//       rate,
-//     },
-//   // };
-// });
+talkerRouter.post('/talker',
+autorizarTalkers,
+// validarTokenTalker,
+validarNameTalker,
+validarAgeTalker,
+validarTalk,
+validarWatchedAtTalker,
+validarRateTalker,
+async (req, res) => {
+const addNewPost = await writeTalker(req.body);
+return res.status(201).json(addNewPost);
+});
   
   module.exports = talkerRouter;

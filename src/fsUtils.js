@@ -1,13 +1,18 @@
-const { readFile } = require('fs').promises;
+const fs = require('fs').promises;
 const path = require('path');
 
-const talkerPath = path.resolve(__dirname, 'talker.json');
+const pathTalker = path.resolve(__dirname, 'talker.json');
 
 const getAllTalker = async () => {
-    const response = await readFile(talkerPath, 'utf-8');
+    const response = await fs.readFile(pathTalker, 'utf-8');
     return JSON.parse(response);
   };
+
+const writeTalker = (newTalker) => {
+  fs.writeFile(pathTalker, JSON.stringify(newTalker));
+};
   
   module.exports = {
     getAllTalker,
+    writeTalker,
   };

@@ -8,7 +8,7 @@ const loginRouter = express.Router();
 
 loginRouter.post('/login', validarEmail, validarSenha, (_req, res) => {
     const validationToken = token();
-    res.status(200).json({ validationToken });
+    res.status(200).json({ token: validationToken });
   });
 
 module.exports = loginRouter;

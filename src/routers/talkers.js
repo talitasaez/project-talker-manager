@@ -31,7 +31,6 @@ talkerRouter.get('/talker', async (req, res) => {
 
 talkerRouter.post('/talker',
 autorizarTalkers,
-// validarTokenTalker,
 validarNameTalker,
 validarAgeTalker,
 validarTalk,

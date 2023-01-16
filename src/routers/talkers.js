@@ -13,6 +13,7 @@ const validarRateTalker = require('../middlewares/talker/validarRateTalker');
 const validarTalk = require('../middlewares/talker/validarTalk');
 
 const talkerRouter = express.Router();
+
 talkerRouter.get('/talker', async (req, res) => {
     const talker = await getAllTalker();
     res.status(200).json(talker);
@@ -52,6 +53,30 @@ async (req, res) => {
   const newtalker = [...allTalker, postTalker];
   await writeTalker(newtalker);
   return res.status(201).json(postTalker);
+});
+
+talkerRouter.put('/talker/:id',
+validarTokenTalker,
+autorizarTalkers,
+validarNameTalker,
+validarAgeTalker,
+validarTalk,
+validarWatchedAtTalker,
+validarRateTalker,
+async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const allTalker = await getAllTalker();
+  const putTalker = {
+    id: Number(id),
+    name,
+    age,
+    talk,
+  };
+  const talkerId = allTalker.filter((e) => e.id !== id);
+  talkerId.push(putTalker);
+  await writeTalker(talkerId);
+  return res.status(200).json(putTalker);
 });
   
   module.exports = talkerRouter;

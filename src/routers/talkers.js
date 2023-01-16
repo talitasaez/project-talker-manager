@@ -39,7 +39,7 @@ validarWatchedAtTalker,
 validarRateTalker,
 async (req, res) => {
   const { name, age, talk: { watchedAt, rate } } = req.body;
-  const allTalker = await writeTalker();
+  const allTalker = await getAllTalker();
   const postTalker = {
     id: allTalker.length + 1,
     name,

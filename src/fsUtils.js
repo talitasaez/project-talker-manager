@@ -10,7 +10,9 @@ const getAllTalker = async () => {
   };
 
   const writeTalker = async (newTalkers) => {
+    console.log(newTalkers);
     fs.writeFile(pathTalker, JSON.stringify(newTalkers));
+    
   };
   
   module.exports = {
